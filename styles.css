@@ -17,7 +17,8 @@ body {
   display: grid;
   grid-template-columns: repeat(var(--grid-size), var(--cell-size));
   grid-template-rows: repeat(var(--grid-size), var(--cell-size));
-  background-color: #CCC;
+  background-color: #cdc1b5;
+  border: solid #bbada0;
   gap: var(--cell-gap);
   border-radius: 1vmin;
   padding: var(--cell-gap);
@@ -25,7 +26,7 @@ body {
 }
 
 .cell {
-  background-color: #AAA;
+  background-color: #bbada0;
   border-radius: 1vmin;
 }
 
