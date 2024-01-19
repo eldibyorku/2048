@@ -1,6 +1,8 @@
 const GRID_SIZE = 4
 const CELL_SIZE = 20
 const CELL_GAP = 2
+const scoreAnimation = document.getElementById('scoreAnimation');
+const scoreValue = document.getElementById('scoreValue');
 
 export default class Grid {
   #cells
@@ -101,6 +103,7 @@ class Cell {
   mergeTiles() {
     if (this.tile == null || this.mergeTile == null) return
     this.tile.value = this.tile.value + this.mergeTile.value
+    updateScore(this.tile.value)
     this.mergeTile.remove()
     this.mergeTile = null
   }
@@ -115,4 +118,25 @@ function createCellElements(gridElement) {
     gridElement.append(cell)
   }
   return cells
+}
+
+function updateScore(change) {
+  // Create and configure the animation element
+  const animationElement = scoreAnimation.cloneNode(true);
+  animationElement.textContent = `+${change}`;
+  animationElement.classList.add('increase-score');
+
+  // Append the animation element to the container
+  scoreValue.parentElement.appendChild(animationElement);
+
+  // Trigger reflow to restart the animation
+  void animationElement.offsetWidth;
+
+  // Apply the animation class
+  animationElement.classList.add('floatUp');
+  scoreValue.innerText = parseInt(scoreValue.innerText) + change;
+  // Update the score after the animation is complete
+  animationElement.addEventListener('animationend', () => {
+    animationElement.remove();
+  });
 }
